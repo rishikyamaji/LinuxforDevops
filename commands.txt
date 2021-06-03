@@ -1,0 +1,177 @@
+directories and usage:
+/
+/home
+/root
+/bin
+/sbin
+/usr
+/var   -- used to store the logfiles
+
+date
+cal
+who
+whoami
+w
+users
+id
+uptime
+man
+init  6    --> to restart the system
+reboot     --> to restart the service
+
+ls  -- list
+ls -ltr -- longist,timestamp,Reverse
+ls -ld   -- to see the permisions of directory
+less
+more
+head
+tail
+cat
+cat > filename
+cat >> filename   -- to append the content at the end
+touch
+rm
+mkdir
+rm -f filename1 filename2   --force delete
+rm -rf  dir1       -- to remove directory recursively
+
+cp
+mv       --to move the file and rename the file
+find     -- we have options  -name (name of file) -user(userwho created it) -group(the file belong)
+grep     -- (global regular expression print)  -i (ignore the case)  ^word (starting of line)
+cd
+diff     -- to see the difference b/w two files   >diff file1 file2
+chmod    644 --> default permission on a file (change the mode of access) (only owner and the root users will change this)
+chown     (chown  john:john)   -- only root user can change the ownership of the file
+file    -- to see the what kind of a file it is
+
+types of files:
+
+-     --> Normal file
+b     --> Block file( Harddisk,floppy disk)
+c     --> character file (Keyboard,mouse)
+d     --> directory   
+l     --> link file (shortcut)
+
+sed      -- stream editor  to replace
+
+       sed 's/old_text/new_text/' file_name        -- replace the text which is separate word
+       sed 's/old_text/new_text/g' file_name       -- replace even if text is part of word
+       sed 's/old_text/new_text/ig' file_name      -- replace even if text and ignore case is part of word
+       sed -i 's/old_text/new_text/' file_name     -- change the actual file
+       sed  -n '5,10p filename                     -- to print the 5 to 10 lines in the files
+       sed '10,20d' filename                       -- disappers in output the 10 to 20 lines
+
+useradd username
+usermod -G rishi akki             -- to change the existing configuration of the user (adding akki to rishi group) -u (userid) -g(primary group id) -d(home directory) -c(comment) -s (shell)
+
+passwd userame     --to set the password for the user
+
+
+System management:
+
+history:        -- list all commands executed by user   .bash history file 
+free:           -- free memory of server    (-m   gives the info in MBs)
+/proc/meminfo:  -- Display memory information
+/proc/cpuinfo:  -- display CPU information
+uname -a:      -- show kernal information
+du:        -- show directory space usage
+whereis:   -- show possible location of app
+which:     -- show which app will be run by default
+du -k /var  | sort -rn head    -- files based on size
+df  -m     -- disk file system available in the system
+
+Software Management:
+     passible only with the root users 
+
+yum install  <package name>
+yum remove   <package name>
+yum update  <package name>
+yum info    <package name>
+yum list available                  -- check in the  repository
+yum list installed                  -- check in the local repository
+
+
+Networking:
+
+hostname  :   --list host name of the server
+ping <ip> :   -- availability of the destination sever over the network
+wget      :   -- download packages/softwares onto Linux system
+ifconfig  or ip addr :   -- list IP address of the server
+telnet    :   -- connect to remote host/ check port availability status
+curl      :   -- access the application as from browser
+
+netstat -tulpn   -- list the listening ports
+
+
+servces:( it is a process  controls the stopping and starting of services)
+
+service <name> status   :
+service <name> start    :
+service <name> stop     :
+service <name> reload   :         re-read the configuration of services (does not close the existing connections)
+service <name> restart   :        re-read the configuration of services (close the existing connections)
+
+chkconfig: (This controls which services are set to start on boot)
+
+chkconfig -list  :
+chkconfig <service> on  :    (systemctl enable httpd)
+chkconfig <service> off :    (systemctl disable httpd)
+
+Process Management:
+
+ps -ef  :            -- list the processes running on the system   (Pid = 1 is the parent processs id we never kill this)
+kill /kill -9  :     -- kill the process or service    (-9  for sure kill)
+fg       :           -- run the program in the foreground   
+bg       :           -- run the service in the background	  (& also do the same    slepp 10 &)   jobs will give jobs    and    bg %1 ==jobid
+top      :           -- top cpu utilised processes
+
+
+
+Archiving files or directories:
+
+gzip   :   create  comprised files
+gunzip :   to uncompress the files
+tar    :   to compress the directory     (tar -cvf  dirname.tar   directoryname)      to uncompress   (tar -xvf dirname.tar)    (tar -xvzf dirname.tar.gz)
+
+crontab:
+
+crontab -l  : to list
+crontab -e  : to create
+
+Link files:
+
+softlinks:  like shortcut
+ln -s  <source> <dest>
+hard link:  like bacup
+ln   <source> <dest>
+
+importent file:
+
+  /ect/passwd  --  users info will be here
+  /etc/group   --  group info will be here
+  /etc/hostname  
+  /etc/ssh/sshd_config  -- to make passwordbased authentication passible
+  /etc/redhat-release   -- to know the version
+  /usr/local/bin  -- user scripts
+importent Ports:
+21: FTP
+22: ssh
+23: Telnet
+25: SMTP
+53: DNS
+80: HTTP
+443: HTTPS
+
+
+ssh
+port: 22
+daemon: sshd
+config: /etc/ssh/sshd_config
+==============================
+http
+port: 80
+daemon(a linux process): httpd
+config: /etc/httpd/conf/httpd.conf
+===================================
+/var/www/html
